@@ -1,0 +1,69 @@
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>BUYSELL</title>
+</head>
+<body>
+<h1>BUYSELL</h1>
+<hr>
+<h4>Регистрация</h4>
+<form th:action="@{/registration}" method="post">
+    Имя пользователя: <input type="text" name="name" /><br><br>
+    Эл. почта: <input type="text" name="email" /><br><br>
+    Номер телефона: <input type="text" name="phoneNumber" /><br><br>
+    Пароль: <input type="password" name="password" /><br><br>
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+    <input type="submit" value="Зарегистрироваться" />
+</form>
+
+<div th:if="${errorMessage}">
+    <h2 style="color: red;" th:text="${errorMessage}"></h2>
+</div>
+
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>BUYSELL</title>
+</head>
+<body>
+<h1>BUYSELL</h1>
+<hr>
+<h4>Регистрация</h4>
+<form th:action="@{/registration}" method="post" th:object="${user}" novalidate>
+    <div>
+        <label for="name">Имя пользователя:</label>
+        <input type="text" id="name" name="name" th:value="*{name}" />
+    </div>
+    <br>
+    <div>
+        <label for="email">Эл. почта:</label>
+        <input type="email" id="email" name="email" th:value="*{email}" />
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red;"></span>
+    </div>
+    <br>
+    <div>
+        <label for="phoneNumber">Номер телефона:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" th:value="*{phoneNumber}" />
+    </div>
+    <br>
+    <div>
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" />
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: red;"></span>
+    </div>
+    <br>
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+    <input type="submit" value="Зарегистрироваться" />
+</form>
+
+<div th:if="${errorMessage}">
+    <h2 style="color: red;" th:text="${errorMessage}"></h2>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BuySell</title>
+</head>
+<body>
+<h1>BUYSELL</h1>
+<hr>
+<h4>Подробная информация о товаре</h4>
+<p><b>Название товара: </b> <span th:text="${product.title}">Product Title</span><br></p>
+<p><b>Описание товара: </b> <span th:text="${product.description}">Product Description</span><br></p>
+<p><b>Цена: </b> <span th:text="${product.price}">0</span><br></p>
+<p><b>Город: </b> <span th:text="${product.city}">City</span><br></p>
+<p><b>Автор: </b> <span th:text="${product.user.name}">Author</span><br></p>
+<p><b>Номер телефона: </b> <span th:text="${product.user.phoneNumber}">Phone Number</span><br></p>
+</body>
+</html>

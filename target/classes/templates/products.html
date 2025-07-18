@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BUYSELL</title>
+</head>
+<body>
+<h1>BUYSELL</h1>
+<hr>
+
+<!-- Проверка, авторизован ли пользователь -->
+<div th:if="${user != null}">
+    <h3>Имя пользователя: <span th:text="${user.name}">Имя пользователя</span></h3>
+    <form action="/logout" method="post">
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+        <input type="submit" value="Выйти"/>
+    </form>
+</div>
+<div th:if="${user == null}">
+    <a href="/login">Войти</a>
+</div>
+
+<hr>
+<h4>Товары со всей Казахстан</h4>
+<form action="/" method="get">
+    Поиск по названию объявления: <input type="text" name="title"/><br><br>
+    <input type="submit" value="Поиск">
+</form>
+
+<!-- Список товаров -->
+<div th:each="product : ${products}">
+    <div>
+        <p><b th:text="${product.title}">Название товара</b>
+            <span th:text="${product.price}">0</span> тг. |
+            <a th:href="@{'/product/' + ${product.id}}">Подробнее...</a>
+        </p>
+    </div>
+</div>
+
+<hr>
+<h3>Создать новый товар</h3>
+<form action="/product/create" method="post" enctype="multipart/form-data">
+    Название объявления: <input type="text" name="title"/><br><br>
+    Описание объявления: <input type="text" name="description"/><br><br>
+    Цена: <input type="number" name="price"/><br><br>
+    Город: <input type="text" name="city"/><br><br>
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+    <input type="submit" value="Добавить товар"/>
+</form>
+</body>
+</html>
